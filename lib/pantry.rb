@@ -4,7 +4,7 @@ class Pantry
 
   def initialize
     @stock = Hash.new(0)
-    @shopping_list = Hash.new
+    @shopping_list = Hash.new(0)
   end
 
   def stock_check(item)
@@ -16,7 +16,7 @@ class Pantry
   end
 
   def add_to_shopping_list(recipe)
-    @shopping_list[recipe.ingredients] = recipe.amount_required(recipe.ingredient_types)
+    @shopping_list[recipe.ingredients] += recipe.amount_required(recipe.ingredient_types)
   end
 
 end

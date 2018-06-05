@@ -1,6 +1,7 @@
 class Pantry
   attr_reader :stock,
-              :shopping_list
+              :shopping_list,
+              :cookbook
 
   def initialize
     @stock = Hash.new(0)
@@ -35,4 +36,18 @@ class Pantry
     @cookbook << recipe
   end
 
+  def what_can_i_make
+    @cookbook.inject([]) do |array, recipe|
+      if enough_ingredients?(recipe)
+        array << recipe.name
+      end
+      array
+    end
+  end
+
+  def enough_ingredients?(recipe)
+    recipe.ingredients.all? do |ing_type, amount|
+      @stock[ing_type] >= amount
+    end
+  end
 end

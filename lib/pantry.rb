@@ -16,7 +16,18 @@ class Pantry
   end
 
   def add_to_shopping_list(recipe)
-    @shopping_list[recipe.ingredients] += recipe.amount_required(recipe.ingredient_types)
+    ingredients = recipe.ingredients
+    ingredients.inject(@shopping_list) do |hash, ingredient|
+      hash[ingredient[0]] += ingredient[1]
+    hash
+    end
+  end
+
+  def print_shopping_list
+    list = @shopping_list.map do |ingredient_type, amount|
+      "* #{ingredient_type}: #{amount}"
+    end
+    list.join("\n")
   end
 
 end

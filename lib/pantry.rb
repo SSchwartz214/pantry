@@ -5,6 +5,7 @@ class Pantry
   def initialize
     @stock = Hash.new(0)
     @shopping_list = Hash.new(0)
+    @cookbook = []
   end
 
   def stock_check(item)
@@ -28,6 +29,10 @@ class Pantry
       "* #{ingredient_type}: #{amount}"
     end
     list.join("\n")
+  end
+
+  def add_to_cookbook(recipe)
+    @cookbook << recipe
   end
 
 end
